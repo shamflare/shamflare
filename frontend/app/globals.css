@@ -1,0 +1,286 @@
+@import "tailwindcss";
+
+/*
+ * Shamflare design tokens.
+ * Colors are defined once here and exposed to Tailwind as semantic utilities
+ * (bg-surface, text-muted, border-line, text-accent …). Contrast of text tokens
+ * against --color-bg / --color-surface: fg 17.6:1, muted 9.3:1, subtle 5.4:1.
+ */
+@theme {
+  --color-bg: #0b1220;
+  --color-bg-deep: #070c16;
+  --color-surface: #111b2d;
+  --color-surface-2: #172338;
+  --color-surface-3: #1e2c45;
+  --color-line: rgb(167 181 204 / 0.14);
+  --color-line-strong: rgb(167 181 204 / 0.28);
+  --color-fg: #f8fafc;
+  --color-muted: #a7b5cc;
+  --color-subtle: #8190a8;
+  --color-accent: #67e8f9;
+  --color-accent-2: #38bdf8;
+  --color-accent-3: #a78bfa;
+  --color-on-accent: #04121c;
+  --color-success: #6ee7b7;
+  --color-warning: #fcd34d;
+  --color-danger: #fda4af;
+
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-heading), var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-code), ui-monospace, SFMono-Regular, Menlo, monospace;
+
+  --radius-sm: 0.375rem;
+  --radius-md: 0.625rem;
+  --radius-lg: 0.875rem;
+  --radius-xl: 1.25rem;
+
+  --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -24px rgb(0 0 0 / 0.6);
+  --shadow-glow: 0 0 0 1px rgb(103 232 249 / 0.25), 0 12px 40px -12px rgb(56 189 248 / 0.35);
+
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+
+  --breakpoint-xs: 26rem;
+}
+
+/* Arabic uses a typeface designed for the script for both headings and body text. */
+:root:lang(ar) {
+  --font-heading: var(--font-arabic);
+  --font-body: var(--font-arabic);
+}
+
+@layer base {
+  html {
+    color-scheme: dark;
+    background-color: var(--color-bg);
+    -webkit-text-size-adjust: 100%;
+    scroll-padding-top: 5.5rem;
+  }
+
+  body {
+    min-height: 100dvh;
+    background-color: var(--color-bg);
+    color: var(--color-fg);
+    font-family: var(--font-sans);
+    font-feature-settings: "ss01", "cv11";
+    text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :lang(ar) body {
+    font-feature-settings: normal;
+    /* Arabic needs more generous line height to avoid clipped diacritics. */
+    line-height: 1.75;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    text-wrap: balance;
+    letter-spacing: -0.02em;
+  }
+
+  :lang(ar) :is(h1, h2, h3, h4) {
+    letter-spacing: 0;
+    line-height: 1.35;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  ::selection {
+    background: rgb(103 232 249 / 0.3);
+    color: var(--color-fg);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  [hidden] {
+    display: none !important;
+  }
+}
+
+@layer components {
+  /* Thin engineering grid used behind hero and CTA sections. */
+  .bg-grid {
+    background-image:
+      linear-gradient(to right, rgb(167 181 204 / 0.06) 1px, transparent 1px),
+      linear-gradient(to bottom, rgb(167 181 204 / 0.06) 1px, transparent 1px);
+    background-size: 56px 56px;
+  }
+
+  .text-gradient {
+    background: linear-gradient(100deg, var(--color-accent) 0%, var(--color-accent-2) 45%, var(--color-accent-3) 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+
+  .eyebrow {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+  }
+
+  :lang(ar) .eyebrow {
+    font-family: var(--font-sans);
+    letter-spacing: 0;
+    font-size: 0.875rem;
+  }
+
+  /* Long-form content rendered from Markdown (blog posts, project write-ups). */
+  .prose-sf {
+    color: var(--color-muted);
+    font-size: 1.0625rem;
+    line-height: 1.8;
+  }
+  .prose-sf > * + * {
+    margin-top: 1.15em;
+  }
+  .prose-sf :is(h2, h3, h4) {
+    color: var(--color-fg);
+    margin-top: 2em;
+    line-height: 1.3;
+  }
+  .prose-sf h2 {
+    font-size: 1.5rem;
+  }
+  .prose-sf h3 {
+    font-size: 1.25rem;
+  }
+  .prose-sf strong {
+    color: var(--color-fg);
+    font-weight: 600;
+  }
+  .prose-sf a {
+    color: var(--color-accent);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-sf :is(ul, ol) {
+    padding-inline-start: 1.4em;
+  }
+  .prose-sf ul {
+    list-style: disc;
+  }
+  .prose-sf ol {
+    list-style: decimal;
+  }
+  .prose-sf li + li {
+    margin-top: 0.4em;
+  }
+  .prose-sf li::marker {
+    color: var(--color-accent);
+  }
+  .prose-sf blockquote {
+    border-inline-start: 2px solid var(--color-accent);
+    padding-inline-start: 1em;
+    color: var(--color-fg);
+  }
+  .prose-sf code {
+    font-family: var(--font-mono);
+    font-size: 0.875em;
+    background: var(--color-surface-2);
+    border: 1px solid var(--color-line);
+    border-radius: 0.3rem;
+    padding: 0.1em 0.35em;
+    color: var(--color-fg);
+  }
+  .prose-sf pre {
+    background: var(--color-bg-deep);
+    border: 1px solid var(--color-line);
+    border-radius: var(--radius-md);
+    padding: 1rem 1.25rem;
+    overflow-x: auto;
+    direction: ltr;
+    text-align: left;
+  }
+  .prose-sf pre code {
+    background: none;
+    border: 0;
+    padding: 0;
+  }
+  .prose-sf hr {
+    border-color: var(--color-line);
+  }
+  .prose-sf table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 0.95em;
+  }
+  .prose-sf :is(th, td) {
+    border-bottom: 1px solid var(--color-line);
+    padding: 0.6em 0.75em;
+    text-align: start;
+  }
+  .prose-sf th {
+    color: var(--color-fg);
+  }
+}
+
+/*
+ * Motion that never hides content: entrance and scroll reveals are pure CSS,
+ * so pages are fully visible before (or without) JavaScript, and browsers
+ * without scroll-driven animations simply show the content.
+ */
+@keyframes sf-enter {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+}
+@keyframes sf-reveal {
+  from {
+    opacity: 0;
+    transform: translateY(28px);
+  }
+}
+@keyframes sf-flow {
+  to {
+    stroke-dashoffset: -120;
+  }
+}
+@keyframes sf-pulse {
+  50% {
+    opacity: 0.35;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .enter {
+    animation: sf-enter 0.7s var(--ease-out-quart) both;
+    animation-delay: var(--enter-delay, 0ms);
+  }
+  @supports (animation-timeline: view()) {
+    .reveal {
+      animation: sf-reveal linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 35%;
+    }
+  }
+  .flow-line {
+    animation: sf-flow 4s linear infinite;
+  }
+  .pulse-dot {
+    animation: sf-pulse 2.4s ease-in-out infinite;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

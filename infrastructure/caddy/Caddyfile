@@ -1,0 +1,63 @@
+# Shamflare reverse proxy.
+# Caddy obtains and renews HTTPS certificates automatically (Let's Encrypt)
+# once DNS for SITE_DOMAIN points at this server and ports 80/443 are open.
+{
+	email {$ACME_EMAIL}
+}
+
+www.{$SITE_DOMAIN} {
+	redir https://{$SITE_DOMAIN}{uri} permanent
+}
+
+{$SITE_DOMAIN} {
+	encode zstd gzip
+
+	header {
+		Strict-Transport-Security "max-age=31536000; includeSubDomains"
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "DENY"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		Permissions-Policy "camera=(), microphone=(), geolocation=(), payment=(), usb=()"
+		Cross-Origin-Opener-Policy "same-origin"
+		# Next.js injects inline bootstrap scripts, hence 'unsafe-inline' for scripts;
+		# everything is still restricted to this origin.
+		Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; font-src 'self'; connect-src 'self'; frame-ancestors 'none'; base-uri 'self'; form-action 'self'; object-src 'none'"
+		-Server
+	}
+
+	# Uploaded media is served directly from the shared volume.
+	handle /media/* {
+		root * /srv
+		header X-Content-Type-Options "nosniff"
+		header Content-Disposition "inline"
+		file_server
+	}
+	# Django: REST API, the internal admin and its static files (WhiteNoise, hashed names).
+	@django path /api/* /django-admin /django-admin/* /static/*
+	handle @django {
+		request_body {
+			max_size 12MB
+		}
+		reverse_proxy backend:8000
+	}
+
+	# Everything else is the Next.js site and dashboard.
+	handle {
+		reverse_proxy frontend:3000
+	}
+
+	log {
+		output stdout
+		format json
+	}
+}
+
+# Internal-only media origin for the Next.js image optimizer (not published to
+# the host; reachable on the Docker network as http://caddy:8080).
+:8080 {
+	handle /media/* {
+		root * /srv
+		file_server
+	}
+	respond 404
+}

@@ -1,0 +1,25 @@
+# Python / virtualenv
+.venv/
+venv/
+__pycache__/
+*.py[cod]
+
+# Local data — never commit databases, uploads or collected static files
+db.sqlite3
+db.sqlite3-journal
+*.sqlite3
+media/
+staticfiles/
+
+# Secrets / local env
+.env
+.env.*
+!.env.example
+
+# Tooling
+*.log
+.coverage
+htmlcov/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
