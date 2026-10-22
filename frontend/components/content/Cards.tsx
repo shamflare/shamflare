@@ -9,9 +9,9 @@ import { Badge } from "@/components/ui/Section";
 import { ServiceIcon } from "@/components/ui/ServiceIcon";
 
 const cardBase =
-  "group relative flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line bg-surface " +
+  "group relative flex flex-col overflow-hidden rounded-[var(--radius-lg)] border border-line bg-card " +
   "shadow-[var(--shadow-card)] transition-[border-color,background-color] duration-300 " +
-  "hover:border-accent/35 hover:bg-surface-2 focus-within:border-accent/50";
+  "hover:border-accent/35 hover:bg-card-hover focus-within:border-accent/50";
 
 /** Makes the whole card clickable while keeping a single, labelled link for assistive tech. */
 const stretchedLink = "after:absolute after:inset-0 after:content-[''] focus-visible:outline-none";
@@ -36,7 +36,7 @@ export async function ServiceCard({ service, index }: { service: ServiceSummary;
         </Link>
       </h3>
       <p className="mt-3 flex-1 leading-relaxed text-muted">{service.summary}</p>
-      <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+      <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-link">
         {t("viewService")}
         <ArrowUpRight className="size-4 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5 rtl:-scale-x-100 rtl:group-hover:-translate-x-0.5" aria-hidden />
       </span>
@@ -47,7 +47,7 @@ export async function ServiceCard({ service, index }: { service: ServiceSummary;
 function CoverPlaceholder({ label }: { label: string }) {
   return (
     <div className="bg-grid relative flex size-full items-center justify-center bg-bg-deep" aria-hidden>
-      <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_40%,rgb(56_189_248/0.18),transparent)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(60%_60%_at_50%_40%,color-mix(in_srgb,var(--color-accent-2)_18%,transparent),transparent)]" />
       <span className="relative font-mono text-xs tracking-[0.2em] text-subtle uppercase" dir="ltr">
         {label}
       </span>
@@ -129,7 +129,7 @@ export async function PostCard({ post, locale }: { post: PostSummary; locale: Lo
           </Link>
         </h3>
         <p className="mt-3 flex-1 leading-relaxed text-muted">{post.excerpt}</p>
-        <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-accent">
+        <span className="mt-6 inline-flex items-center gap-1.5 text-sm font-medium text-link">
           {t("readArticle")}
           <ArrowUpRight className="size-4 rtl:-scale-x-100" aria-hidden />
         </span>

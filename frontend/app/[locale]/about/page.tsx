@@ -46,9 +46,9 @@ export default async function AboutPage({ params }: PageProps<"/[locale]/about">
         <h2 id="principles-title" className="text-3xl font-semibold sm:text-4xl">
           {t("principlesTitle")}
         </h2>
-        <ul className="mt-12 grid gap-5 sm:grid-cols-2">
+        <ul className="reveal-group mt-12 grid gap-5 sm:grid-cols-2">
           {PRINCIPLES.map(([n, Icon]) => (
-            <li key={n} className="reveal rounded-[var(--radius-lg)] border border-line bg-surface p-7">
+            <li key={n} className="rounded-[var(--radius-lg)] border border-line bg-surface p-7">
               <Icon className="size-6 text-accent" strokeWidth={1.6} aria-hidden />
               <h3 className="mt-6 text-xl font-semibold">{t(`principle${n}Title`)}</h3>
               <p className="mt-3 leading-relaxed text-muted">{t(`principle${n}Body`)}</p>

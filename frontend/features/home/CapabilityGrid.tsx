@@ -13,9 +13,9 @@ const CAPABILITIES = [
 export async function CapabilityGrid() {
   const t = await getTranslations("Home");
   return (
-    <ul className="mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
+    <ul className="reveal-group mt-14 grid gap-x-10 gap-y-12 sm:grid-cols-2 lg:grid-cols-3">
       {CAPABILITIES.map(([n, Icon]) => (
-        <li key={n} className="reveal flex gap-5">
+        <li key={n} className="flex gap-5">
           <span className="grid size-11 shrink-0 place-items-center rounded-[var(--radius-md)] border border-line bg-surface text-accent">
             <Icon className="size-5" strokeWidth={1.6} aria-hidden />
           </span>

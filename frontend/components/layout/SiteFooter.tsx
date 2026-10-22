@@ -1,4 +1,5 @@
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail } from "lucide-react";
+import { WhatsAppIcon } from "@/components/brand/WhatsAppIcon";
 import { getTranslations } from "next-intl/server";
 import { Link } from "@/i18n/navigation";
 import type { ServiceSummary, SiteSettings } from "@/lib/api/types";
@@ -20,7 +21,7 @@ export async function SiteFooter({ settings, services, whatsappHref, year }: Foo
   const linkClass = "text-muted transition-colors hover:text-fg";
 
   return (
-    <footer className="border-t border-line bg-bg-deep">
+    <footer className="sf-footer border-t border-line text-fg">
       <Container className="grid gap-12 py-16 md:grid-cols-12">
         <div className="md:col-span-5">
           <Link href="/" aria-label="Shamflare" className="inline-block rounded-[var(--radius-sm)]">
@@ -62,7 +63,7 @@ export async function SiteFooter({ settings, services, whatsappHref, year }: Foo
             {whatsappHref ? (
               <li>
                 <a href={whatsappHref} target="_blank" rel="noopener noreferrer" className={`${linkClass} inline-flex items-center gap-2`}>
-                  <MessageCircle className="size-4" aria-hidden />
+                  <WhatsAppIcon className="size-4" aria-hidden />
                   {tWa("short")}
                 </a>
               </li>
@@ -87,9 +88,17 @@ export async function SiteFooter({ settings, services, whatsappHref, year }: Foo
       </Container>
       <Container className="flex flex-col gap-3 border-t border-line py-6 text-sm text-subtle sm:flex-row sm:items-center sm:justify-between">
         <p>{t("rights", { year })}</p>
-        <a href="#top" className="transition-colors hover:text-fg">
-          {t("backToTop")}
-        </a>
+        <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
+          <Link href="/privacy" className="transition-colors hover:text-fg">
+            {t("privacy")}
+          </Link>
+          <Link href="/terms" className="transition-colors hover:text-fg">
+            {t("terms")}
+          </Link>
+          <a href="#top" className="transition-colors hover:text-fg">
+            {t("backToTop")}
+          </a>
+        </div>
       </Container>
     </footer>
   );

@@ -43,6 +43,10 @@ Browser ──HTTPS──▶ Caddy ──▶ /api, /django-admin, /static ──
 - **Email is prepared, not active.** Inquiries are always stored first; notification email is a
   separate step that is skipped until SMTP settings are provided (see backend README).
 - **Hosting** exists only as a draft service in the CMS — not shown publicly until published.
+- **Appearance.** Colors (per part, for dark and light mode), fonts, text size, button and card
+  shapes and the scroll-reveal motion are edited at `/admin/appearance` beside a live preview of the
+  real site. They are stored as validated design-token overrides (`/api/v1/appearance/`) and turned
+  into CSS by `frontend/lib/appearance.ts`; with no overrides the site keeps its built-in design.
 - **Brand.** The wordmark is typographic (`components/brand/Wordmark.tsx`, favicon `app/icon.svg`).
   Replace those two files when a final SVG logo exists.
 

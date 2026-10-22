@@ -30,6 +30,25 @@ session cookies (HttpOnly) plus CSRF — no tokens in `localStorage`.
 
 ## Public endpoints (anonymous, read-only except inquiries)
 
+### `GET /appearance/`
+Site look edited on the dashboard's Appearance page. Not localized. Always complete:
+`null` colors/fonts mean "built-in default".
+```json
+{
+  "preset": "",                                   // informational, e.g. "sunset"
+  "colors": { "dark": { "bg": "#0b1220" | null, ... }, "light": { ... } },
+  "fonts": { "heading", "body", "arabic_heading", "arabic_body" },   // font key | null
+  "text": { "body_scale": 1.0, "heading_scale": 1.0, "heading_weight": 600 },
+  "buttons": { "shape": "rounded", "style": "solid", "size": "regular", "weight": 500, "glow": true },
+  "cards": { "corners": "rounded" },
+  "motion": { "reveal": "blur", "speed": "gentle" },
+  "updated_at": "..."
+}
+```
+Color keys: `bg, surface, fg, muted, accent, accent_2, accent_3, on_accent, header_bg,
+header_fg, hero_bg, card_bg, button_bg, button_fg, link, footer_bg, footer_fg, whatsapp`
+(`#rrggbb` only). Allowed fonts and enum values: `backend/apps/site_settings/appearance.py`.
+
 ### `GET /site-settings/?lang=`
 ```json
 {
@@ -188,6 +207,11 @@ PATCH accepts only `status`, `internal_notes`.
 `company_name, contact_email, whatsapp_number (digits, 8–15), social_links [{label, url}],
 translations { lang: { tagline, hero_title, hero_subtitle, about_intro, about_body, whatsapp_message } },
 updated_at`.
+
+### `/admin/appearance/` — GET, PUT (singleton)
+Same shape as the public endpoint. PUT replaces the whole configuration; missing keys
+fall back to defaults (so `{}` restores the built-in design). Unknown keys and values
+outside the allowed lists are rejected (`validation_error`, dotted field keys).
 
 ### Uploads
 Images only (JPEG, PNG, WebP), verified with Pillow, max 5 MB (configurable),

@@ -1,9 +1,10 @@
 import { cn } from "@/lib/cn";
 
 /**
- * Typographic Shamflare wordmark: a compact "flare" glyph (an S-curve cut by a
- * spark) followed by the lowercase name. The glyph alone is reused for the
- * favicon (app/icon.svg). Replace this component when a final SVG logo exists.
+ * Typographic Shamflare wordmark: a rounded-square mark with a bold "S" and a
+ * crisp four-point star, followed by the lowercase name. The mark alone is
+ * reused for the favicon (app/icon.svg). Replace this component when a final
+ * SVG logo exists.
  */
 export function BrandMark({ className, title, id = "sf-mark" }: { className?: string; title?: string; id?: string }) {
   return (
@@ -15,21 +16,30 @@ export function BrandMark({ className, title, id = "sf-mark" }: { className?: st
       aria-label={title}
     >
       <defs>
-        <linearGradient id={id} x1="4" y1="28" x2="28" y2="4" gradientUnits="userSpaceOnUse">
-          <stop offset="0" stopColor="#38BDF8" />
-          <stop offset="0.55" stopColor="#67E8F9" />
-          <stop offset="1" stopColor="#A78BFA" />
-        </linearGradient>
+        <filter id={`${id}-glow`} x="-60%" y="-60%" width="220%" height="220%">
+          <feGaussianBlur stdDeviation="0.7" result="blur" />
+          <feMerge>
+            <feMergeNode in="blur" />
+            <feMergeNode in="SourceGraphic" />
+          </feMerge>
+        </filter>
       </defs>
-      <rect x="1" y="1" width="30" height="30" rx="8" fill="#111B2D" stroke={`url(#${id})`} strokeOpacity="0.55" />
+      <rect x="1.5" y="1.5" width="29" height="29" rx="7" fill="#0B1220" stroke="#5EE3F7" strokeWidth="1.8" />
       <path
-        d="M21.5 9.5c-1.2-1.3-3-2-5.2-2-3.3 0-5.6 1.8-5.6 4.4 0 5.6 10.8 3.2 10.8 8.4 0 2.6-2.4 4.4-5.8 4.4-2.4 0-4.4-.9-5.7-2.4"
+        d="M20.6 10.6c-1-1.4-2.6-2.1-4.6-2.1-2.9 0-4.9 1.6-4.9 3.8 0 5 9.9 2.9 9.9 7.6 0 2.3-2.1 3.9-5.2 3.9-2.2 0-4-.8-5.2-2.3"
         fill="none"
-        stroke={`url(#${id})`}
-        strokeWidth="2.6"
+        stroke="#5EE3F7"
+        strokeWidth="3.1"
         strokeLinecap="round"
+        strokeLinejoin="round"
       />
-      <path d="M24.5 4.5l.9 2.1 2.1.9-2.1.9-.9 2.1-.9-2.1-2.1-.9 2.1-.9z" fill="#67E8F9" />
+      {/* Shining four-point star (twinkles unless reduced motion is preferred). */}
+      <g className="sf-twinkle" filter={`url(#${id}-glow)`}>
+        <path
+          d="M24.9 3.9C25.16 6.74 25.56 7.14 28.4 7.4 25.56 7.66 25.16 8.06 24.9 10.9 24.64 8.06 24.24 7.66 21.4 7.4 24.24 7.14 24.64 6.74 24.9 3.9Z"
+          fill="#FFFFFF"
+        />
+      </g>
     </svg>
   );
 }
@@ -41,13 +51,13 @@ export function Wordmark({
 }: {
   className?: string;
   size?: "sm" | "md" | "lg";
-  /** Unique per page: the SVG gradient id. */
+  /** Unique per page: the SVG filter id. */
   id?: string;
 }) {
   const sizes = {
-    sm: { mark: "size-6", text: "text-base" },
-    md: { mark: "size-7", text: "text-lg" },
-    lg: { mark: "size-9", text: "text-2xl" },
+    sm: { mark: "size-7", text: "text-base" },
+    md: { mark: "size-9", text: "text-xl" },
+    lg: { mark: "size-11", text: "text-2xl" },
   }[size];
 
   return (

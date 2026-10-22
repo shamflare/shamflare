@@ -117,9 +117,9 @@ async function ServiceDetail({ params }: Pick<Props, "params">) {
           <h2 id="use-cases-title" className="text-3xl font-semibold">
             {t("useCases")}
           </h2>
-          <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <ul className="reveal-group mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {service.use_cases.map((item) => (
-              <li key={item} className="reveal rounded-[var(--radius-md)] border border-line bg-surface px-5 py-4 leading-relaxed text-muted">
+              <li key={item} className="rounded-[var(--radius-md)] border border-line bg-surface px-5 py-4 leading-relaxed text-muted">
                 {item}
               </li>
             ))}
@@ -132,9 +132,9 @@ async function ServiceDetail({ params }: Pick<Props, "params">) {
           <h2 id="process-title" className="text-3xl font-semibold">
             {t("process")}
           </h2>
-          <ol className="mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
+          <ol className="reveal-group mt-12 grid gap-8 md:grid-cols-2 lg:grid-cols-4">
             {service.process.map((step, index) => (
-              <li key={`${step.title}-${index}`} className="reveal border-t border-accent/40 pt-6">
+              <li key={`${step.title}-${index}`} className="border-t border-accent/40 pt-6">
                 <span className="font-mono text-xs text-subtle" dir="ltr">
                   {String(index + 1).padStart(2, "0")}
                 </span>
@@ -151,7 +151,7 @@ async function ServiceDetail({ params }: Pick<Props, "params">) {
           <h2 id="related-title" className="text-3xl font-semibold">
             {t("relatedProjects")}
           </h2>
-          <div className="mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="reveal-group mt-10 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {service.related_projects.map((project) => (
               <div key={project.id} className="flex [&>article]:flex-1">
                 <ProjectCard project={project} />

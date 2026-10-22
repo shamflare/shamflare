@@ -4,7 +4,7 @@ import { getPosts, getProjects, getServices, isUnavailable } from "@/lib/api/ser
 import type { AvailableLanguage } from "@/lib/api/types";
 import { absoluteUrl, localizedPath } from "@/lib/site";
 
-const STATIC_PATHS = ["", "about", "services", "portfolio", "blog", "contact"];
+const STATIC_PATHS = ["", "about", "services", "portfolio", "blog", "contact", "privacy", "terms"];
 const MAX_PAGES = 20;
 
 type Item = { id: number; available_languages: AvailableLanguage[] };

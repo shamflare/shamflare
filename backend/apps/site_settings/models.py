@@ -75,3 +75,33 @@ class SiteSettingsTranslation(TranslationModel):
 
     def __str__(self) -> str:
         return f"Site settings ({self.language})"
+
+
+class SiteAppearance(TimeStampedModel):
+    """Singleton (pk is always 1): colors, fonts and shapes edited from the dashboard.
+
+    ``config`` follows the schema in ``appearance.py``; empty values mean the built-in design.
+    """
+
+    SINGLETON_PK = 1
+
+    config = models.JSONField(default=dict, blank=True)
+
+    class Meta:
+        verbose_name = "site appearance"
+        verbose_name_plural = "site appearance"
+
+    def __str__(self) -> str:
+        return "Site appearance"
+
+    def save(self, *args, **kwargs):
+        self.pk = self.SINGLETON_PK
+        super().save(*args, **kwargs)
+
+    def delete(self, *args, **kwargs):  # the singleton is never deleted
+        return 0, {}
+
+    @classmethod
+    def load(cls) -> SiteAppearance:
+        obj, _ = cls.objects.get_or_create(pk=cls.SINGLETON_PK)
+        return obj

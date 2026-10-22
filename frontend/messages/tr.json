@@ -14,7 +14,11 @@
     "blogDescription": "Yazılım ürünlerini planlama, geliştirme ve sürdürme üzerine pratik yazılar.",
     "contactTitle": "Proje Başlatın",
     "contactDescription": "Projenizi Shamflare’e anlatın. Hedeflerinizi paylaşın, sonraki adımlarla size dönelim.",
-    "notFoundTitle": "Sayfa bulunamadı"
+    "notFoundTitle": "Sayfa bulunamadı",
+    "privacyTitle": "Gizlilik Politikası",
+    "privacyDescription": "Shamflare'in hangi kişisel verileri neden topladığı, ne kadar sakladığı ve haklarınız.",
+    "termsTitle": "Kullanım Koşulları",
+    "termsDescription": "Shamflare web sitesini kullanırken geçerli olan koşullar."
   },
   "Common": {
     "skipToContent": "Ana içeriğe geç",
@@ -51,7 +55,11 @@
     "openMenu": "Menüyü aç",
     "closeMenu": "Menüyü kapat",
     "language": "Dil",
-    "changeLanguage": "Dili değiştir"
+    "changeLanguage": "Dili değiştir",
+    "theme": "Tema",
+    "themeSystem": "Sistem",
+    "themeLight": "Açık",
+    "themeDark": "Koyu"
   },
   "Hero": {
     "eyebrow": "Yazılım geliştirme stüdyosu",
@@ -197,7 +205,7 @@
     "description": "Proje açıklaması",
     "descriptionHint": "Ne geliştirmek istiyorsunuz, kimler için ve bir teslim tarihi var mı? (20–5000 karakter)",
     "preferredLanguage": "Yanıt için tercih ettiğiniz dil",
-    "consent": "Talebime yanıt verilebilmesi için Shamflare’in bu bilgileri saklamasını kabul ediyorum.",
+    "consent": "Talebime yanıt verilebilmesi için Shamflare’in bu bilgileri <link>Gizlilik Politikası</link>’nda açıklandığı şekilde saklamasını kabul ediyorum.",
     "honeypot": "Bu alanı boş bırakın",
     "submit": "Talebi gönder",
     "submitting": "Gönderiliyor…",
@@ -223,7 +231,9 @@
     "services": "Hizmetler",
     "contact": "İletişim",
     "rights": "© {year} Shamflare. Tüm hakları saklıdır.",
-    "backToTop": "Başa dön"
+    "backToTop": "Başa dön",
+    "privacy": "Gizlilik Politikası",
+    "terms": "Kullanım Koşulları"
   },
   "WhatsApp": {
     "label": "Shamflare ile WhatsApp’tan yazışın",
@@ -240,5 +250,11 @@
     "title": "Bir şeyler ters gitti.",
     "body": "Bu sayfa yüklenirken beklenmeyen bir hata oluştu.",
     "retry": "Tekrar dene"
+  },
+  "Legal": {
+    "eyebrow": "Yasal",
+    "privacyTitle": "Gizlilik Politikası",
+    "termsTitle": "Kullanım Koşulları",
+    "updated": "Son güncelleme: {date}"
   }
 }

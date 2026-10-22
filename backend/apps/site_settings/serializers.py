@@ -4,7 +4,8 @@ from rest_framework import serializers
 
 from apps.core.translations import TranslatableAdminSerializer, TranslationsField, text_field
 
-from .models import SiteSettings, SiteSettingsTranslation
+from .appearance import default_config, normalize_appearance
+from .models import SiteAppearance, SiteSettings, SiteSettingsTranslation
 
 MAX_SOCIAL_LINKS = 12
 
@@ -88,3 +89,22 @@ class SiteSettingsAdminSerializer(TranslatableAdminSerializer):
         if value and not (8 <= len(digits) <= 15):
             raise serializers.ValidationError("Enter the international number as 8–15 digits.")
         return digits
+
+
+class AppearanceSerializer(serializers.Serializer):
+    """The complete appearance configuration; input may be partial (missing = default)."""
+
+    def to_internal_value(self, data):
+        return normalize_appearance(data)
+
+    def to_representation(self, instance: SiteAppearance):
+        try:
+            config = normalize_appearance(instance.config)
+        except serializers.ValidationError:
+            config = default_config()  # stored data predating a schema change
+        return {**config, "updated_at": instance.updated_at}
+
+    def update(self, instance: SiteAppearance, validated_data):
+        instance.config = validated_data
+        instance.save()
+        return instance

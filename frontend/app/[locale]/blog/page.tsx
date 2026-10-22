@@ -89,7 +89,7 @@ async function PostListing({ locale, searchParams }: { locale: Locale; searchPar
         <EmptyState message={t("empty")} />
       ) : (
         <>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="reveal-group grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {posts.results.map((post) => (
               <div key={post.id} className="flex [&>article]:flex-1">
                 <PostCard post={post} locale={locale} />

@@ -9,8 +9,11 @@ import { directionOf, locales, routing, type Locale } from "@/i18n/routing";
 import { getServices, getSiteSettings, isUnavailable } from "@/lib/api/server";
 import { fontVariables } from "@/lib/fonts";
 import { DEFAULT_WHATSAPP_NUMBER, SITE_URL, ogLocales, staticAlternates, whatsappUrl } from "@/lib/site";
+import { AppearanceStyle } from "@/components/layout/AppearanceStyle";
+import { RevealObserver } from "@/components/layout/RevealObserver";
 import { SiteFooter } from "@/components/layout/SiteFooter";
 import { SiteHeader } from "@/components/layout/SiteHeader";
+import { ThemeScript } from "@/components/layout/ThemeScript";
 import { WhatsAppButton } from "@/components/layout/WhatsAppButton";
 
 // Namespaces needed by Client Components; everything else stays on the server.
@@ -21,8 +24,11 @@ export function generateStaticParams() {
 }
 
 export const viewport: Viewport = {
-  themeColor: "#0b1220",
-  colorScheme: "dark",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#f5f7fb" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b1220" },
+  ],
+  colorScheme: "dark light",
 };
 
 export async function generateMetadata({ params }: LayoutProps<"/[locale]">): Promise<Metadata> {
@@ -97,8 +103,17 @@ export default async function LocaleLayout({ children, params }: LayoutProps<"/[
       lang={locale}
       dir={directionOf(locale)}
       className={fontVariables}
+      // The theme script sets data-theme before hydration.
+      suppressHydrationWarning
     >
+      <head>
+        <ThemeScript />
+      </head>
       <body id="top">
+        <Suspense fallback={null}>
+          <AppearanceStyle />
+        </Suspense>
+        <RevealObserver />
         <NextIntlClientProvider locale={locale} messages={clientMessages}>
           <a
             href="#main"

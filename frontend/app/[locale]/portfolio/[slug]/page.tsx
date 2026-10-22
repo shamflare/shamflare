@@ -155,7 +155,7 @@ async function ProjectDetail({ params }: Pick<Props, "params">) {
             <h2 id="gallery-title" className="text-2xl font-semibold">
               {t("gallery")}
             </h2>
-            <ul className="mt-8 grid gap-5 sm:grid-cols-2">
+            <ul className="reveal-group mt-8 grid gap-5 sm:grid-cols-2">
               {project.images.map((image) => (
                 <li key={image.id} className="relative aspect-[4/3] overflow-hidden rounded-[var(--radius-lg)] border border-line">
                   <Image src={image.url} alt={image.alt} fill sizes="(min-width: 640px) 50vw, 100vw" className="object-cover" />

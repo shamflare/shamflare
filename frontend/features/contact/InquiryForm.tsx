@@ -4,6 +4,7 @@ import { AnimatePresence, LazyMotion, MotionConfig, domAnimation, m } from "moti
 import { CircleAlert, CircleCheck, LoaderCircle } from "lucide-react";
 import { useLocale, useTranslations } from "next-intl";
 import { useId, useRef, useState, type FormEvent, type ReactNode } from "react";
+import { Link } from "@/i18n/navigation";
 import { localeNames, locales, type Locale } from "@/i18n/routing";
 import { ApiError, apiRequest } from "@/lib/api/client";
 import { BUDGET_OPTIONS, type InquiryPayload, type InquiryReceipt } from "@/lib/api/types";
@@ -369,7 +370,16 @@ export function InquiryForm({ services }: { services: ServiceOption[] }) {
                     aria-required
                     className="mt-0.5 size-4.5 shrink-0 accent-[var(--color-accent)]"
                   />
-                  <span>{t("consent")}</span>
+                  <span>
+                    {t.rich("consent", {
+                      // New tab, so the visitor does not lose what they have typed.
+                      link: (chunks) => (
+                        <Link href="/privacy" target="_blank" className="text-accent underline underline-offset-2 hover:text-fg">
+                          {chunks}
+                        </Link>
+                      ),
+                    })}
+                  </span>
                 </label>
                 {errors.consent ? (
                   <p id={id("consent-error")} className="mt-2 text-sm text-danger">

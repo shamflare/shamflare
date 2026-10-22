@@ -11,6 +11,7 @@ import {
   Layers,
   LogOut,
   Menu,
+  Palette,
   Settings,
   Tag,
   X,
@@ -29,6 +30,7 @@ const NAV = [
   { href: "/admin/portfolio", label: "Portfolio", icon: Folder },
   { href: "/admin/blog", label: "Blog posts", icon: FileText, exclude: "/admin/blog/categories" },
   { href: "/admin/blog/categories", label: "Blog categories", icon: Tag },
+  { href: "/admin/appearance", label: "Appearance", icon: Palette },
   { href: "/admin/settings", label: "Site settings", icon: Settings },
 ];
 
@@ -178,7 +180,8 @@ export function AdminShell({ children }: { children: ReactNode }) {
         </div>
 
         <main className="min-w-0 px-4 py-8 sm:px-8 lg:py-10">
-          <div className="mx-auto max-w-6xl">{children}</div>
+          {/* The appearance editor sits beside a live preview, so it gets the full width. */}
+          <div className={cn("mx-auto", pathname.startsWith("/admin/appearance") ? "max-w-[110rem]" : "max-w-6xl")}>{children}</div>
         </main>
       </div>
     </SessionContext.Provider>

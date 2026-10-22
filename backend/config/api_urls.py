@@ -16,7 +16,12 @@ from apps.core.stats import AdminStatsView
 from apps.inquiries.views import InquiryAdminViewSet, InquiryCreateView
 from apps.portfolio.views import ProjectAdminViewSet, PublicProjectDetailView, PublicProjectListView
 from apps.services.views import PublicServiceDetailView, PublicServiceListView, ServiceAdminViewSet
-from apps.site_settings.views import PublicSiteSettingsView, SiteSettingsAdminView
+from apps.site_settings.views import (
+    AppearanceAdminView,
+    PublicAppearanceView,
+    PublicSiteSettingsView,
+    SiteSettingsAdminView,
+)
 
 SLUG = "<str:slug>/"
 
@@ -30,12 +35,14 @@ admin_router.register("inquiries", InquiryAdminViewSet, basename="admin-inquiry"
 admin_urlpatterns = [
     path("stats/", AdminStatsView.as_view(), name="admin-stats"),
     path("site-settings/", SiteSettingsAdminView.as_view(), name="admin-site-settings"),
+    path("appearance/", AppearanceAdminView.as_view(), name="admin-appearance"),
     *admin_router.urls,
 ]
 
 urlpatterns = [
     # Public
     path("site-settings/", PublicSiteSettingsView.as_view(), name="site-settings"),
+    path("appearance/", PublicAppearanceView.as_view(), name="appearance"),
     path("services/", PublicServiceListView.as_view(), name="service-list"),
     path("services/" + SLUG, PublicServiceDetailView.as_view(), name="service-detail"),
     path("portfolio/", PublicProjectListView.as_view(), name="portfolio-list"),

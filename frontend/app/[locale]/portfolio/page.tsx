@@ -89,7 +89,7 @@ async function ProjectListing({ locale, searchParams }: { locale: Locale; search
         <EmptyState message={t("empty")} />
       ) : (
         <>
-          <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="reveal-group grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {projects.results.map((project, index) => (
               <div key={project.id} className="flex [&>article]:flex-1">
                 <ProjectCard project={project} priority={index < 3} />

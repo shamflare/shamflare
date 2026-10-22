@@ -14,7 +14,11 @@
     "blogDescription": "مقالات عملية حول تخطيط المنتجات البرمجية وبنائها وصيانتها.",
     "contactTitle": "ابدأ مشروعك",
     "contactDescription": "حدّثنا عن مشروعك. شاركنا أهدافك وسنرد عليك بالخطوات التالية.",
-    "notFoundTitle": "الصفحة غير موجودة"
+    "notFoundTitle": "الصفحة غير موجودة",
+    "privacyTitle": "سياسة الخصوصية",
+    "privacyDescription": "ما البيانات الشخصية التي تجمعها Shamflare، ولماذا، ومدة الاحتفاظ بها، وحقوقك.",
+    "termsTitle": "شروط الاستخدام",
+    "termsDescription": "الشروط التي تسري عند استخدامك موقع Shamflare."
   },
   "Common": {
     "skipToContent": "انتقل إلى المحتوى الرئيسي",
@@ -51,7 +55,11 @@
     "openMenu": "فتح القائمة",
     "closeMenu": "إغلاق القائمة",
     "language": "اللغة",
-    "changeLanguage": "تغيير اللغة"
+    "changeLanguage": "تغيير اللغة",
+    "theme": "المظهر",
+    "themeSystem": "تلقائي (حسب النظام)",
+    "themeLight": "فاتح",
+    "themeDark": "داكن"
   },
   "Hero": {
     "eyebrow": "استوديو لتطوير البرمجيات",
@@ -197,7 +205,7 @@
     "description": "وصف المشروع",
     "descriptionHint": "ماذا تريد أن تبني، ولمن، وهل هناك موعد نهائي؟ (من 20 إلى 5000 حرف)",
     "preferredLanguage": "اللغة المفضّلة للرد",
-    "consent": "أوافق على أن تحتفظ Shamflare بهذه البيانات للرد على طلبي.",
+    "consent": "أوافق على أن تحتفظ Shamflare بهذه البيانات للرد على طلبي، وفق ما توضحه <link>سياسة الخصوصية</link>.",
     "honeypot": "اترك هذا الحقل فارغاً",
     "submit": "إرسال الطلب",
     "submitting": "جارٍ الإرسال…",
@@ -223,7 +231,9 @@
     "services": "الخدمات",
     "contact": "تواصل",
     "rights": "© {year} Shamflare. جميع الحقوق محفوظة.",
-    "backToTop": "العودة إلى الأعلى"
+    "backToTop": "العودة إلى الأعلى",
+    "privacy": "سياسة الخصوصية",
+    "terms": "شروط الاستخدام"
   },
   "WhatsApp": {
     "label": "تواصل مع Shamflare عبر واتساب",
@@ -240,5 +250,11 @@
     "title": "حدث خطأ ما.",
     "body": "حدث خطأ غير متوقع أثناء تحميل هذه الصفحة.",
     "retry": "إعادة المحاولة"
+  },
+  "Legal": {
+    "eyebrow": "معلومات قانونية",
+    "privacyTitle": "سياسة الخصوصية",
+    "termsTitle": "شروط الاستخدام",
+    "updated": "آخر تحديث: {date}"
   }
 }

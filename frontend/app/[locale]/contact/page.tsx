@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Suspense } from "react";
-import { Mail, MessageCircle, ShieldCheck } from "lucide-react";
+import { Mail, ShieldCheck } from "lucide-react";
+import { WhatsAppIcon } from "@/components/brand/WhatsAppIcon";
 import { getTranslations } from "next-intl/server";
 import type { Locale } from "@/i18n/routing";
 import { getServices, getSiteSettings, isUnavailable } from "@/lib/api/server";
@@ -82,7 +83,7 @@ async function DirectContact({ locale, whatsapp, email }: { locale: Locale; what
         {whatsapp ? (
           <li>
             <a href={whatsapp} target="_blank" rel="noopener noreferrer" className={row}>
-              <MessageCircle className="size-5 text-[#25D366]" aria-hidden />
+              <WhatsAppIcon className="size-5 text-whatsapp" aria-hidden />
               <span>
                 <span className="block text-sm font-medium text-fg">{t("whatsapp")}</span>
                 <span className="block text-sm text-muted" dir="ltr">

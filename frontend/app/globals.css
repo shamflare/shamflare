@@ -20,10 +20,43 @@
   --color-accent: #67e8f9;
   --color-accent-2: #38bdf8;
   --color-accent-3: #a78bfa;
+  --color-accent-hover: #8cf0fb;
   --color-on-accent: #04121c;
   --color-success: #6ee7b7;
   --color-warning: #fcd34d;
   --color-danger: #fda4af;
+
+  /*
+   * Per-part colors. They follow the palette above (so the light theme switches
+   * them too) unless the dashboard's Appearance page overrides them.
+   */
+  --color-header: var(--color-bg);
+  --color-header-fg: var(--color-fg);
+  --color-header-muted: var(--color-muted);
+  --color-hero: var(--color-bg);
+  --color-card: var(--color-surface);
+  --color-card-hover: var(--color-surface-2);
+  --color-btn: var(--color-accent);
+  --color-btn-hover: var(--color-accent-hover);
+  --color-btn-fg: var(--color-on-accent);
+  --color-link: var(--color-accent);
+  --color-footer: var(--color-bg-deep);
+  --color-footer-fg: var(--color-fg);
+  --color-footer-muted: var(--color-muted);
+  --color-footer-subtle: var(--color-subtle);
+  --color-whatsapp: #25d366;
+
+  /* Text sizes scale with the dashboard's body / heading size settings. */
+  --text-xs: calc(0.75rem * var(--fs-body, 1));
+  --text-sm: calc(0.875rem * var(--fs-body, 1));
+  --text-base: calc(1rem * var(--fs-body, 1));
+  --text-lg: calc(1.125rem * var(--fs-body, 1));
+  --text-xl: calc(1.25rem * var(--fs-body, 1));
+  --text-2xl: calc(1.5rem * var(--fs-heading, 1));
+  --text-3xl: calc(1.875rem * var(--fs-heading, 1));
+  --text-4xl: calc(2.25rem * var(--fs-heading, 1));
+  --text-5xl: calc(3rem * var(--fs-heading, 1));
+  --text-6xl: calc(3.75rem * var(--fs-heading, 1));
 
   --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
   --font-display: var(--font-heading), var(--font-body), ui-sans-serif, system-ui, sans-serif;
@@ -35,17 +68,89 @@
   --radius-xl: 1.25rem;
 
   --shadow-card: 0 1px 0 0 rgb(255 255 255 / 0.04) inset, 0 20px 40px -24px rgb(0 0 0 / 0.6);
-  --shadow-glow: 0 0 0 1px rgb(103 232 249 / 0.25), 0 12px 40px -12px rgb(56 189 248 / 0.35);
+  --shadow-glow:
+    0 0 0 1px color-mix(in srgb, var(--color-accent) 25%, transparent),
+    0 12px 40px -12px color-mix(in srgb, var(--color-accent-2) 35%, transparent);
+  --shadow-float: 0 30px 60px -30px rgb(0 0 0 / 0.8);
+  --grid-line: rgb(167 181 204 / 0.06);
 
   --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
 
   --breakpoint-xs: 26rem;
 }
 
-/* Arabic uses a typeface designed for the script for both headings and body text. */
+/*
+ * Light theme. The dark palette above is the default (and what visitors without
+ * JavaScript get); the inline script in the locale layout resolves the stored
+ * choice or the system preference to data-theme="light" | "dark" before paint.
+ * Contrast against --color-bg / --color-surface: fg 17:1, muted 7.2:1,
+ * subtle 4.6:1, accent 5.2:1.
+ */
+:root[data-theme="light"] {
+  color-scheme: light;
+  --color-bg: #f5f7fb;
+  --color-bg-deep: #eaeff6;
+  --color-surface: #ffffff;
+  --color-surface-2: #f1f4f9;
+  --color-surface-3: #e3e9f1;
+  --color-line: rgb(15 23 42 / 0.1);
+  --color-line-strong: rgb(15 23 42 / 0.2);
+  --color-fg: #0b1220;
+  --color-muted: #475569;
+  --color-subtle: #5f6d82;
+  --color-accent: #0e7490;
+  --color-accent-2: #0369a1;
+  --color-accent-3: #7c3aed;
+  --color-accent-hover: #155e75;
+  --color-on-accent: #ffffff;
+  --color-success: #047857;
+  --color-warning: #b45309;
+  --color-danger: #be123c;
+  --shadow-card: 0 1px 2px rgb(15 23 42 / 0.06), 0 16px 36px -20px rgb(15 23 42 / 0.22);
+  --shadow-glow:
+    0 0 0 1px color-mix(in srgb, var(--color-accent) 25%, transparent),
+    0 12px 32px -12px color-mix(in srgb, var(--color-accent-2) 30%, transparent);
+  --shadow-float: 0 30px 60px -30px rgb(15 23 42 / 0.35);
+  --grid-line: rgb(15 23 42 / 0.05);
+  --tilt-shadow: rgb(15 23 42 / 0.3);
+}
+
+/*
+ * Typeface roles and component knobs. lib/appearance.ts overrides these from
+ * the dashboard (with `html:root` selectors, which outrank the ones below).
+ */
+:root {
+  --font-heading: var(--ff-sora);
+  --font-body: var(--ff-inter);
+  --font-arabic-heading: var(--ff-ibm-plex-arabic);
+  --font-arabic-body: var(--ff-ibm-plex-arabic);
+  --fs-body: 1;
+  --fs-heading: 1;
+
+  /* Primary button: background may be a gradient, hence `background`, not a color. */
+  --radius-btn: var(--radius-md);
+  --btn-scale: 1;
+  --btn-weight: 500;
+  --btn-bg: var(--color-btn);
+  --btn-bg-hover: var(--color-btn-hover);
+  --btn-fg: var(--color-btn-fg);
+  --btn-fg-hover: var(--color-btn-fg);
+  --btn-border: transparent;
+  --btn-glow: var(--shadow-glow);
+
+  --tilt-shadow: rgb(2 6 23 / 0.75);
+
+  /* Scroll reveal (see the motion section at the end). */
+  --reveal-opacity: 0;
+  --reveal-from: translate3d(0, 48px, 0) scale(0.965);
+  --reveal-blur: 12px;
+  --reveal-duration: 1.3s;
+}
+
+/* Arabic uses typefaces designed for the script for both headings and body text. */
 :root:lang(ar) {
-  --font-heading: var(--font-arabic);
-  --font-body: var(--font-arabic);
+  --font-heading: var(--font-arabic-heading);
+  --font-body: var(--font-arabic-body);
 }
 
 @layer base {
@@ -61,6 +166,7 @@
     background-color: var(--color-bg);
     color: var(--color-fg);
     font-family: var(--font-sans);
+    font-size: var(--text-base);
     font-feature-settings: "ss01", "cv11";
     text-rendering: optimizeLegibility;
     -webkit-font-smoothing: antialiased;
@@ -81,9 +187,14 @@
     letter-spacing: -0.02em;
   }
 
+  /* Sora is wide: small headings (cards, steps) need less negative tracking than display sizes. */
+  h3,
+  h4 {
+    letter-spacing: -0.01em;
+  }
+
   :lang(ar) :is(h1, h2, h3, h4) {
     letter-spacing: 0;
-    line-height: 1.35;
   }
 
   p {
@@ -91,7 +202,7 @@
   }
 
   ::selection {
-    background: rgb(103 232 249 / 0.3);
+    background: color-mix(in srgb, var(--color-accent) 30%, transparent);
     color: var(--color-fg);
   }
 
@@ -107,11 +218,69 @@
 }
 
 @layer components {
+  /*
+   * Site parts re-scope the palette so everything inside them (links, toggles,
+   * the mobile menu) follows the part's own colors from the Appearance page.
+   */
+  .sf-header {
+    --color-bg: var(--color-header);
+    --color-fg: var(--color-header-fg);
+    --color-muted: var(--color-header-muted);
+  }
+  .sf-footer {
+    --color-bg-deep: var(--color-footer);
+    --color-fg: var(--color-footer-fg);
+    --color-muted: var(--color-footer-muted);
+    --color-subtle: var(--color-footer-subtle);
+    background-color: var(--color-footer);
+  }
+  .sf-hero {
+    background-color: var(--color-hero);
+  }
+
+  .sf-btn-primary {
+    background: var(--btn-bg);
+    color: var(--btn-fg);
+    border: 1px solid var(--btn-border);
+  }
+  .sf-btn-primary:hover {
+    background: var(--btn-bg-hover);
+    color: var(--btn-fg-hover);
+    box-shadow: var(--btn-glow);
+  }
+
+  /*
+   * Hero 3D tilt (features/home/TiltStage.tsx sets --tilt-x/-y/-on). Layers use
+   * the individual `translate` property for depth, so it composes with the
+   * `.enter` animation's transform. At rest every value is 0: a flat scene.
+   */
+  .sf-tilt {
+    transform-style: preserve-3d;
+    transform: rotateX(calc(var(--tilt-y, 0) * -11deg)) rotateY(calc(var(--tilt-x, 0) * 15deg));
+    scale: calc(1 + var(--tilt-on, 0) * 0.02);
+  }
+  .sf-tilt .sf-depth {
+    translate: calc(var(--tilt-x, 0) * var(--z, 0px) * 0.18) calc(var(--tilt-y, 0) * var(--z, 0px) * 0.18) var(--z, 0px);
+  }
+  /* Shadow that falls away from the light as the scene turns. */
+  .sf-tilt-shadow {
+    box-shadow: calc(var(--tilt-x, 0) * -26px) calc(30px + var(--tilt-y, 0) * -26px) 60px -28px var(--tilt-shadow);
+  }
+  /* Specular highlight that follows the pointer across the editor. */
+  .sf-glare {
+    background: radial-gradient(
+      circle at calc(50% + var(--tilt-x, 0) * 55%) calc(45% + var(--tilt-y, 0) * 55%),
+      rgb(255 255 255 / 0.1),
+      transparent 55%
+    );
+    opacity: var(--tilt-on, 0);
+  }
+
   /* Thin engineering grid used behind hero and CTA sections. */
   .bg-grid {
     background-image:
-      linear-gradient(to right, rgb(167 181 204 / 0.06) 1px, transparent 1px),
-      linear-gradient(to bottom, rgb(167 181 204 / 0.06) 1px, transparent 1px);
+      linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+      linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
     background-size: 56px 56px;
   }
 
@@ -134,12 +303,13 @@
     font-family: var(--font-sans);
     letter-spacing: 0;
     font-size: 0.875rem;
+    font-weight: 500;
   }
 
   /* Long-form content rendered from Markdown (blog posts, project write-ups). */
   .prose-sf {
     color: var(--color-muted);
-    font-size: 1.0625rem;
+    font-size: calc(1.0625rem * var(--fs-body, 1));
     line-height: 1.8;
   }
   .prose-sf > * + * {
@@ -161,7 +331,7 @@
     font-weight: 600;
   }
   .prose-sf a {
-    color: var(--color-accent);
+    color: var(--color-link);
     text-decoration: underline;
     text-underline-offset: 3px;
   }
@@ -227,9 +397,22 @@
 }
 
 /*
- * Motion that never hides content: entrance and scroll reveals are pure CSS,
- * so pages are fully visible before (or without) JavaScript, and browsers
- * without scroll-driven animations simply show the content.
+ * Arabic script needs more vertical room than Latin (taller ascenders, diacritics).
+ * In the utilities layer so it also wins over the line-heights bundled with
+ * text-* sizes and the tight leading-[…] values tuned for Latin headings.
+ */
+@layer utilities {
+  :lang(ar) :is(h1, h2, h3, h4) {
+    line-height: 1.35;
+  }
+  :lang(ar) .leading-relaxed {
+    line-height: 1.85;
+  }
+}
+
+/*
+ * Motion. Hero entrances are pure CSS; scroll reveals hide content only when
+ * JavaScript has opted the page in (see [data-reveal] below).
  */
 @keyframes sf-enter {
   from {
@@ -237,15 +420,34 @@
     transform: translateY(14px);
   }
 }
+/* Opacity, travel and blur come from variables so the dashboard can restyle the reveal. */
 @keyframes sf-reveal {
   from {
-    opacity: 0;
-    transform: translateY(28px);
+    opacity: var(--reveal-opacity);
+    transform: var(--reveal-from);
+    filter: blur(var(--reveal-blur));
+  }
+  to {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
   }
 }
 @keyframes sf-flow {
   to {
     stroke-dashoffset: -120;
+  }
+}
+@keyframes sf-twinkle {
+  0%,
+  70%,
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+  80% {
+    transform: scale(1.18) rotate(12deg);
+    opacity: 0.85;
   }
 }
 @keyframes sf-pulse {
@@ -259,18 +461,58 @@
     animation: sf-enter 0.7s var(--ease-out-quart) both;
     animation-delay: var(--enter-delay, 0ms);
   }
-  @supports (animation-timeline: view()) {
-    .reveal {
-      animation: sf-reveal linear both;
-      animation-timeline: view();
-      animation-range: entry 0% entry 35%;
+  /*
+   * Scroll reveal: `.reveal` elements, and every child of a `.reveal-group`
+   * (card grids), appear as they enter the viewport with a slow expo-out
+   * entrance. Grid children are staggered by column (--reveal-i).
+   */
+  .reveal-group > :nth-child(3n + 2) {
+    --reveal-i: 1;
+  }
+  .reveal-group > :nth-child(3n + 3) {
+    --reveal-i: 2;
+  }
+  @media (min-width: 64rem) {
+    .reveal-group.lg\:grid-cols-4 > :nth-child(n) {
+      --reveal-i: 0;
     }
+    .reveal-group.lg\:grid-cols-4 > :nth-child(4n + 2) {
+      --reveal-i: 1;
+    }
+    .reveal-group.lg\:grid-cols-4 > :nth-child(4n + 3) {
+      --reveal-i: 2;
+    }
+    .reveal-group.lg\:grid-cols-4 > :nth-child(4n + 4) {
+      --reveal-i: 3;
+    }
+  }
+
+  /*
+   * Hidden until seen: with [data-reveal] on <html> (set before first paint by
+   * the theme script, kept by RevealObserver) elements wait invisible, then play
+   * their entrance once when RevealObserver marks them [data-revealed]. Without
+   * JavaScript the attribute is never set, so nothing is ever hidden.
+   */
+  [data-reveal] :is(.reveal, .reveal-group > *):not([data-revealed]) {
+    opacity: var(--reveal-opacity);
+    transform: var(--reveal-from);
+    filter: blur(var(--reveal-blur));
+  }
+  [data-reveal] :is(.reveal, .reveal-group > *)[data-revealed] {
+    /* `backwards`: once finished the element returns to its own styles (hover transforms etc.). */
+    animation: sf-reveal var(--reveal-duration) cubic-bezier(0.16, 1, 0.3, 1) backwards;
+    animation-delay: calc(var(--reveal-i, 0) * 130ms);
   }
   .flow-line {
     animation: sf-flow 4s linear infinite;
   }
   .pulse-dot {
     animation: sf-pulse 2.4s ease-in-out infinite;
+  }
+  .sf-twinkle {
+    transform-box: fill-box;
+    transform-origin: center;
+    animation: sf-twinkle 3.2s ease-in-out infinite;
   }
 }
 
@@ -282,5 +524,140 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+}
+
+/* ---- Dashboard controls (Appearance page) ---------------------------------- */
+@layer components {
+  .sf-range {
+    appearance: none;
+    height: 6px;
+    border-radius: 999px;
+    background: linear-gradient(to right, var(--color-accent) var(--pct, 50%), var(--color-surface-3) var(--pct, 50%));
+    cursor: pointer;
+  }
+  .sf-range::-webkit-slider-thumb {
+    appearance: none;
+    width: 18px;
+    height: 18px;
+    border-radius: 50%;
+    background: var(--color-fg);
+    border: 4px solid var(--color-accent);
+    box-shadow: 0 2px 8px rgb(0 0 0 / 0.4);
+  }
+  .sf-range::-moz-range-thumb {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: var(--color-fg);
+    border: 4px solid var(--color-accent);
+  }
+
+  .sf-switch {
+    appearance: none;
+    position: relative;
+    flex-shrink: 0;
+    width: 2.25rem;
+    height: 1.25rem;
+    border-radius: 999px;
+    background: var(--color-surface-3);
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  .sf-switch::after {
+    content: "";
+    position: absolute;
+    top: 3px;
+    inset-inline-start: 3px;
+    width: 0.875rem;
+    height: 0.875rem;
+    border-radius: 50%;
+    background: var(--color-fg);
+    transition: translate 0.25s var(--ease-out-quart);
+  }
+  .sf-switch:checked {
+    background: var(--color-accent);
+  }
+  .sf-switch:checked::after {
+    translate: 1rem 0;
+    background: var(--color-on-accent);
+  }
+
+  /* Looping demos of each scroll-reveal style. */
+  [data-motion] .sf-motion-sample {
+    animation: 2.6s cubic-bezier(0.16, 1, 0.3, 1) infinite both;
+  }
+  [data-motion="blur"] .sf-motion-sample {
+    animation-name: sf-demo-blur;
+  }
+  [data-motion="rise"] .sf-motion-sample {
+    animation-name: sf-demo-rise;
+  }
+  [data-motion="zoom"] .sf-motion-sample {
+    animation-name: sf-demo-zoom;
+  }
+  [data-motion="tilt"] .sf-motion-sample {
+    animation-name: sf-demo-tilt;
+  }
+  [data-motion="fade"] .sf-motion-sample {
+    animation-name: sf-demo-fade;
+  }
+}
+
+@keyframes sf-demo-blur {
+  0% {
+    opacity: 0;
+    transform: translateY(16px) scale(0.94);
+    filter: blur(4px);
+  }
+  45%,
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+@keyframes sf-demo-rise {
+  0% {
+    opacity: 0;
+    transform: translateY(22px);
+  }
+  45%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes sf-demo-zoom {
+  0% {
+    opacity: 0;
+    transform: scale(0.7);
+    filter: blur(2px);
+  }
+  45%,
+  100% {
+    opacity: 1;
+    transform: none;
+    filter: blur(0);
+  }
+}
+@keyframes sf-demo-tilt {
+  0% {
+    opacity: 0;
+    transform: perspective(200px) rotateX(40deg) translateY(14px);
+  }
+  45%,
+  100% {
+    opacity: 1;
+    transform: none;
+  }
+}
+@keyframes sf-demo-fade {
+  0% {
+    opacity: 0;
+  }
+  45%,
+  100% {
+    opacity: 1;
   }
 }

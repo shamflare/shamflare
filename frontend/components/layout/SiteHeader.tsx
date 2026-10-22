@@ -8,6 +8,7 @@ import { Container } from "@/components/ui/Section";
 import { LanguageSwitcher } from "./LanguageSwitcher";
 import { MobileMenu } from "./MobileMenu";
 import { NAV_ITEMS } from "./nav";
+import { ThemeToggle } from "./ThemeToggle";
 import { DesktopNavLinks } from "./NavLinks";
 
 /*
@@ -55,7 +56,7 @@ function MenuButtonPlaceholder() {
 export async function SiteHeader() {
   const t = await getTranslations("Nav");
   return (
-    <header className="sticky top-0 z-40 border-b border-line">
+    <header className="sf-header sticky top-0 z-40 border-b border-line text-fg">
       {/* Blur lives on a sibling layer: a filter on <header> itself would trap the fixed mobile menu. */}
       <div aria-hidden className="absolute inset-0 -z-10 bg-bg/80 backdrop-blur-xl supports-[backdrop-filter]:bg-bg/65" />
       <Container className="flex h-16 items-center justify-between gap-6">
@@ -68,10 +69,11 @@ export async function SiteHeader() {
           </Suspense>
         </nav>
         <div className="flex items-center gap-2">
+          <ThemeToggle />
           <Suspense fallback={<LanguageButtonPlaceholder />}>
             <LanguageSwitcher />
           </Suspense>
-          <ButtonLink href="/contact" size="sm" className="hidden sm:inline-flex">
+          <ButtonLink href="/contact" size="sm" className="max-sm:hidden">
             {t("startProject")}
           </ButtonLink>
           <Suspense fallback={<MenuButtonPlaceholder />}>

@@ -14,7 +14,11 @@
     "blogDescription": "Practical articles on planning, building and maintaining software products.",
     "contactTitle": "Start a Project",
     "contactDescription": "Tell Shamflare about your project. Share your goals and we will reply with the next steps.",
-    "notFoundTitle": "Page not found"
+    "notFoundTitle": "Page not found",
+    "privacyTitle": "Privacy Policy",
+    "privacyDescription": "What personal data Shamflare collects, why, how long we keep it and your rights.",
+    "termsTitle": "Terms of Use",
+    "termsDescription": "The terms that apply when you use the Shamflare website."
   },
   "Common": {
     "skipToContent": "Skip to main content",
@@ -51,7 +55,11 @@
     "openMenu": "Open menu",
     "closeMenu": "Close menu",
     "language": "Language",
-    "changeLanguage": "Change language"
+    "changeLanguage": "Change language",
+    "theme": "Theme",
+    "themeSystem": "System",
+    "themeLight": "Light",
+    "themeDark": "Dark"
   },
   "Hero": {
     "eyebrow": "Software development studio",
@@ -197,7 +205,7 @@
     "description": "Project description",
     "descriptionHint": "What do you want to build, who is it for, and is there a deadline? (20–5000 characters)",
     "preferredLanguage": "Preferred language for our reply",
-    "consent": "I agree that Shamflare may store these details to respond to my inquiry.",
+    "consent": "I agree that Shamflare may store these details to respond to my inquiry, as described in the <link>Privacy Policy</link>.",
     "honeypot": "Leave this field empty",
     "submit": "Send inquiry",
     "submitting": "Sending…",
@@ -223,7 +231,9 @@
     "services": "Services",
     "contact": "Contact",
     "rights": "© {year} Shamflare. All rights reserved.",
-    "backToTop": "Back to top"
+    "backToTop": "Back to top",
+    "privacy": "Privacy Policy",
+    "terms": "Terms of Use"
   },
   "WhatsApp": {
     "label": "Chat with Shamflare on WhatsApp",
@@ -240,5 +250,11 @@
     "title": "Something went wrong.",
     "body": "An unexpected error occurred while loading this page.",
     "retry": "Try again"
+  },
+  "Legal": {
+    "eyebrow": "Legal",
+    "privacyTitle": "Privacy Policy",
+    "termsTitle": "Terms of Use",
+    "updated": "Last updated: {date}"
   }
 }

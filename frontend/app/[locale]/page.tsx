@@ -75,7 +75,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
       {/* Process */}
       <Section aria-labelledby="process-title">
         <SectionHeader id="process-title" eyebrow={t("processEyebrow")} title={t("processTitle")} />
-        <ol className="mt-14 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
+        <ol className="reveal-group mt-14 grid gap-px overflow-hidden rounded-[var(--radius-lg)] border border-line bg-line sm:grid-cols-2 lg:grid-cols-4">
           {(
             [
               [1, Compass],
@@ -84,7 +84,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
               [4, LifeBuoy],
             ] as const
           ).map(([n, Icon]) => (
-            <li key={n} className="reveal flex flex-col bg-bg p-7">
+            <li key={n} className="flex flex-col bg-bg p-7">
               <div className="flex items-center justify-between">
                 <Icon className="size-6 text-accent" strokeWidth={1.6} aria-hidden />
                 <span className="font-mono text-xs text-subtle" dir="ltr">
@@ -106,7 +106,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
 
       {/* CTA */}
       <section aria-labelledby="cta-title" className="px-5 sm:px-8">
-        <div className="bg-grid relative mx-auto max-w-7xl overflow-hidden rounded-[var(--radius-xl)] border border-line bg-surface px-6 py-16 text-center sm:px-12 sm:py-20">
+        <div className="reveal bg-grid relative mx-auto max-w-7xl overflow-hidden rounded-[var(--radius-xl)] border border-line bg-surface px-6 py-16 text-center sm:px-12 sm:py-20">
           <div aria-hidden className="absolute -top-32 left-1/2 h-64 w-[36rem] -translate-x-1/2 rounded-full bg-accent/15 blur-3xl" />
           <div className="relative mx-auto max-w-2xl">
             <h2 id="cta-title" className="text-3xl font-semibold sm:text-4xl">
@@ -139,7 +139,7 @@ export default async function HomePage({ params }: PageProps<"/[locale]">) {
 async function Hero({ locale }: { locale: Locale }) {
   const t = await getTranslations({ locale, namespace: "Hero" });
   return (
-    <section aria-labelledby="hero-title" className="relative overflow-hidden border-b border-line">
+    <section aria-labelledby="hero-title" className="sf-hero relative overflow-hidden border-b border-line">
       <div aria-hidden className="bg-grid absolute inset-0 [mask-image:radial-gradient(80%_70%_at_60%_30%,black,transparent)]" />
       <div aria-hidden className="absolute -top-48 end-[-10%] h-[36rem] w-[36rem] rounded-full bg-accent-3/10 blur-3xl" />
       <Container className="relative grid items-center gap-14 pt-14 pb-20 sm:pt-20 lg:grid-cols-12 lg:gap-10 lg:pt-24 lg:pb-28">
@@ -172,7 +172,7 @@ async function Hero({ locale }: { locale: Locale }) {
 function HeroCopy({ title, subtitle }: { title: string; subtitle: string }) {
   return (
     <>
-      <h1 id="hero-title" className="enter text-[2.5rem] leading-[1.08] font-semibold xs:text-5xl lg:text-[3.6rem]">
+      <h1 id="hero-title" className="enter text-[length:calc(2.5rem*var(--fs-heading,1))] leading-[1.08] font-semibold xs:text-5xl lg:text-[length:calc(3.6rem*var(--fs-heading,1))]">
         {title}
       </h1>
       <p className="enter mt-6 max-w-xl text-lg leading-relaxed text-muted sm:text-xl" style={{ "--enter-delay": "80ms" } as CSSProperties}>
@@ -204,9 +204,9 @@ async function HomeServices({ locale }: { locale: Locale }) {
   const services = data?.results ?? [];
   if (services.length === 0) return <EmptyState message={t("empty")} className="mt-12" />;
   return (
-    <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+    <div className="reveal-group mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
       {services.map((service, index) => (
-        <div key={service.id} className="reveal flex">
+        <div key={service.id} className="flex">
           <ServiceCard service={service} index={index} />
         </div>
       ))}
@@ -239,9 +239,9 @@ async function HomePortfolio({ locale }: { locale: Locale }) {
       {projects.length === 0 ? (
         <EmptyState message={t("emptyPortfolio")} className="mt-12" />
       ) : (
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="reveal-group mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {projects.map((project) => (
-            <div key={project.id} className="reveal flex [&>article]:flex-1">
+            <div key={project.id} className="flex [&>article]:flex-1">
               <ProjectCard project={project} />
             </div>
           ))}
@@ -275,9 +275,9 @@ async function HomeBlog({ locale }: { locale: Locale }) {
       {posts.length === 0 ? (
         <EmptyState message={t("emptyBlog")} className="mt-12" />
       ) : (
-        <div className="mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="reveal-group mt-12 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {posts.map((post) => (
-            <div key={post.id} className="reveal flex [&>article]:flex-1">
+            <div key={post.id} className="flex [&>article]:flex-1">
               <PostCard post={post} locale={locale} />
             </div>
           ))}

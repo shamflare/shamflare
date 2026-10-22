@@ -95,6 +95,13 @@ async function resilient<T>(label: string, load: () => Promise<T | null>): Promi
 
 // ---- cached loaders -------------------------------------------------------
 
+async function loadAppearance() {
+  "use cache";
+  cacheLife("content");
+  cacheTag("appearance");
+  return fetchJson<unknown>("appearance/", {});
+}
+
 async function loadSiteSettings(locale: Locale) {
   "use cache";
   cacheLife("content");
@@ -163,6 +170,11 @@ async function loadPost(locale: Locale, slug: string) {
 }
 
 // ---- public getters --------------------------------------------------------
+
+/** Raw appearance configuration; validate with normalizeAppearance() / appearanceCss(). */
+export function getAppearance(): Promise<Fetched<unknown>> {
+  return resilient("appearance", () => loadAppearance());
+}
 
 export function getSiteSettings(locale: Locale): Promise<Fetched<SiteSettings>> {
   return resilient("site settings", () => loadSiteSettings(locale));
