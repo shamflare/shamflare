@@ -87,7 +87,7 @@ const SHAPE_RADIUS = { sharp: "0px", soft: "6px", rounded: "10px", round: "16px"
 const CORNER_RADIUS = { sharp: "0px", soft: "6px", rounded: "12px", round: "22px" } as const;
 
 const REVEALS: { value: Appearance["motion"]["reveal"]; label: string; badge?: string }[] = [
-  { value: "blur", label: "Blur & rise", badge: "New" },
+  { value: "blur", label: "Soft rise", badge: "New" },
   { value: "rise", label: "Rise" },
   { value: "zoom", label: "Zoom" },
   { value: "tilt", label: "3D tilt" },

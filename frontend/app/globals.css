@@ -143,7 +143,6 @@
   /* Scroll reveal (see the motion section at the end). */
   --reveal-opacity: 0;
   --reveal-from: translate3d(0, 48px, 0) scale(0.965);
-  --reveal-blur: 12px;
   --reveal-duration: 1.3s;
 }
 
@@ -420,17 +419,15 @@
     transform: translateY(14px);
   }
 }
-/* Opacity, travel and blur come from variables so the dashboard can restyle the reveal. */
+/* Opacity and travel come from variables so the dashboard can restyle the reveal. No blur: it smeared text mid-animation. */
 @keyframes sf-reveal {
   from {
     opacity: var(--reveal-opacity);
     transform: var(--reveal-from);
-    filter: blur(var(--reveal-blur));
   }
   to {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
 }
 @keyframes sf-flow {
@@ -496,7 +493,6 @@
   [data-reveal] :is(.reveal, .reveal-group > *):not([data-revealed]) {
     opacity: var(--reveal-opacity);
     transform: var(--reveal-from);
-    filter: blur(var(--reveal-blur));
   }
   [data-reveal] :is(.reveal, .reveal-group > *)[data-revealed] {
     /* `backwards`: once finished the element returns to its own styles (hover transforms etc.). */
@@ -608,13 +604,11 @@
   0% {
     opacity: 0;
     transform: translateY(16px) scale(0.94);
-    filter: blur(4px);
   }
   45%,
   100% {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
 }
 @keyframes sf-demo-rise {
@@ -632,13 +626,11 @@
   0% {
     opacity: 0;
     transform: scale(0.7);
-    filter: blur(2px);
   }
   45%,
   100% {
     opacity: 1;
     transform: none;
-    filter: blur(0);
   }
 }
 @keyframes sf-demo-tilt {

@@ -332,12 +332,12 @@ const CORNERS: Record<Appearance["cards"]["corners"], [string, string, string, s
 };
 const BUTTON_SCALE: Record<Appearance["buttons"]["size"], number> = { compact: 0.9, regular: 1, large: 1.12 };
 const REVEAL: Record<Appearance["motion"]["reveal"], string[]> = {
-  none: ["--reveal-opacity:1", "--reveal-from:none", "--reveal-blur:0px"],
-  fade: ["--reveal-from:none", "--reveal-blur:0px"],
-  rise: ["--reveal-from:translate3d(0,64px,0)", "--reveal-blur:0px"],
-  zoom: ["--reveal-from:scale(0.88)", "--reveal-blur:6px"],
+  none: ["--reveal-opacity:1", "--reveal-from:none"],
+  fade: ["--reveal-from:none"],
+  rise: ["--reveal-from:translate3d(0,64px,0)"],
+  zoom: ["--reveal-from:scale(0.88)"],
   blur: [],
-  tilt: ["--reveal-from:perspective(1100px) rotateX(16deg) translate3d(0,48px,0) scale(0.98)", "--reveal-blur:4px"],
+  tilt: ["--reveal-from:perspective(1100px) rotateX(16deg) translate3d(0,48px,0) scale(0.98)"],
 };
 const SPEED: Record<Appearance["motion"]["speed"], string[]> = {
   gentle: [],
