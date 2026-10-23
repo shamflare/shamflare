@@ -22,8 +22,8 @@ export async function SiteFooter({ settings, services, whatsappHref, year }: Foo
 
   return (
     <footer className="sf-footer border-t border-line text-fg">
-      <Container className="grid gap-12 py-16 md:grid-cols-12">
-        <div className="md:col-span-5">
+      <Container className="grid gap-12 py-16 md:grid-cols-2 lg:grid-cols-12">
+        <div className="lg:col-span-4">
           <Link href="/" aria-label="Shamflare" className="inline-block rounded-[var(--radius-sm)]">
             <Wordmark id="sf-mark-footer" />
           </Link>
@@ -31,7 +31,7 @@ export async function SiteFooter({ settings, services, whatsappHref, year }: Foo
           {settings?.tagline ? <p className="mt-3 max-w-sm text-sm leading-relaxed text-subtle">{t("description")}</p> : null}
         </div>
 
-        <nav aria-label={t("explore")} className="md:col-span-2">
+        <nav aria-label={t("explore")} className="lg:col-span-2">
           <h2 className="text-sm font-semibold text-fg">{t("explore")}</h2>
           <ul className="mt-4 grid gap-3 text-sm">
             {NAV_ITEMS.map((item) => (
@@ -44,7 +44,7 @@ export async function SiteFooter({ settings, services, whatsappHref, year }: Foo
           </ul>
         </nav>
 
-        <nav aria-label={t("services")} className="md:col-span-3">
+        <nav aria-label={t("services")} className="lg:col-span-3">
           <h2 className="text-sm font-semibold text-fg">{t("services")}</h2>
           <ul className="mt-4 grid gap-3 text-sm">
             {services.map((service) => (
@@ -57,7 +57,7 @@ export async function SiteFooter({ settings, services, whatsappHref, year }: Foo
           </ul>
         </nav>
 
-        <div className="md:col-span-2">
+        <div className="lg:col-span-3">
           <h2 className="text-sm font-semibold text-fg">{t("contact")}</h2>
           <ul className="mt-4 grid gap-3 text-sm">
             {whatsappHref ? (
@@ -70,9 +70,12 @@ export async function SiteFooter({ settings, services, whatsappHref, year }: Foo
             ) : null}
             {settings?.contact_email ? (
               <li>
-                <a href={`mailto:${settings.contact_email}`} className={`${linkClass} inline-flex items-center gap-2 break-all`} dir="ltr">
+                <a href={`mailto:${settings.contact_email}`} className={`${linkClass} inline-flex items-center gap-2`}>
                   <Mail className="size-4 shrink-0" aria-hidden />
-                  {settings.contact_email}
+                  {/* Keep the address on one line and in LTR order; the icon follows the page direction. */}
+                  <span dir="ltr" className="whitespace-nowrap">
+                    {settings.contact_email}
+                  </span>
                 </a>
               </li>
             ) : null}

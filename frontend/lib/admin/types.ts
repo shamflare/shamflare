@@ -1,6 +1,6 @@
 // Admin API shapes (docs/api.md → "Admin endpoints").
 import type { Locale } from "@/i18n/routing";
-import type { Budget, ProcessStep } from "@/lib/api/types";
+import type { Budget, LegalKind, ProcessStep } from "@/lib/api/types";
 
 export type PublishStatus = "draft" | "published";
 export type TranslationState = "published" | "draft" | "incomplete" | "missing";
@@ -140,6 +140,16 @@ export type AdminSettings = {
   whatsapp_number: string;
   social_links: { label: string; url: string }[];
   translations: TranslationMap<SettingsTranslation>;
+  updated_at: string;
+};
+
+export type LegalTranslation = { body: string };
+
+export type AdminLegalDocument = {
+  kind: LegalKind;
+  translations: TranslationMap<LegalTranslation>;
+  translation_status: Partial<Record<Locale, TranslationState>>;
+  content_updated_at: string | null;
   updated_at: string;
 };
 

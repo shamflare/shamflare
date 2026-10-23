@@ -12,6 +12,7 @@ import {
   LogOut,
   Menu,
   Palette,
+  Scale,
   Settings,
   Tag,
   X,
@@ -31,6 +32,7 @@ const NAV = [
   { href: "/admin/blog", label: "Blog posts", icon: FileText, exclude: "/admin/blog/categories" },
   { href: "/admin/blog/categories", label: "Blog categories", icon: Tag },
   { href: "/admin/appearance", label: "Appearance", icon: Palette },
+  { href: "/admin/legal", label: "Legal pages", icon: Scale },
   { href: "/admin/settings", label: "Site settings", icon: Settings },
 ];
 

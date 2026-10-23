@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     "apps.blog",
     "apps.inquiries",
     "apps.site_settings",
+    "apps.legal",
 ]
 
 MIDDLEWARE = [

@@ -5,6 +5,8 @@ import { connection } from "next/server";
 import type { Locale } from "@/i18n/routing";
 import type {
   BlogCategory,
+  LegalDocument,
+  LegalKind,
   Paginated,
   PostDetail,
   PostSummary,
@@ -109,6 +111,13 @@ async function loadSiteSettings(locale: Locale) {
   return fetchJson<SiteSettings>("site-settings/", { lang: locale });
 }
 
+async function loadLegalDocument(kind: LegalKind, locale: Locale) {
+  "use cache";
+  cacheLife("content");
+  cacheTag("legal");
+  return fetchJson<LegalDocument>(`legal/${kind}/`, { lang: locale });
+}
+
 async function loadServices(locale: Locale) {
   "use cache";
   cacheLife("content");
@@ -178,6 +187,10 @@ export function getAppearance(): Promise<Fetched<unknown>> {
 
 export function getSiteSettings(locale: Locale): Promise<Fetched<SiteSettings>> {
   return resilient("site settings", () => loadSiteSettings(locale));
+}
+
+export function getLegalDocument(kind: LegalKind, locale: Locale): Promise<Fetched<LegalDocument>> {
+  return resilient(`legal ${kind}`, () => loadLegalDocument(kind, locale));
 }
 
 export function getServices(locale: Locale): Promise<Fetched<Paginated<ServiceSummary>>> {

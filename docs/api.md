@@ -49,6 +49,14 @@ Color keys: `bg, surface, fg, muted, accent, accent_2, accent_3, on_accent, head
 header_fg, hero_bg, card_bg, button_bg, button_fg, link, footer_bg, footer_fg, whatsapp`
 (`#rrggbb` only). Allowed fonts and enum values: `backend/apps/site_settings/appearance.py`.
 
+### `GET /legal/{kind}/?lang=`
+`kind` is `privacy` or `terms` (anything else → 404). An empty `body` means the language
+has no text in the CMS and the frontend shows its built-in document (`frontend/content/legal`).
+```json
+{ "kind": "privacy", "body": "Markdown…", "updated_at": "..." | null }
+```
+`updated_at` is the public "Last updated" date: it moves only when a translation's text changes.
+
 ### `GET /site-settings/?lang=`
 ```json
 {
@@ -212,6 +220,10 @@ updated_at`.
 Same shape as the public endpoint. PUT replaces the whole configuration; missing keys
 fall back to defaults (so `{}` restores the built-in design). Unknown keys and values
 outside the allowed lists are rejected (`validation_error`, dotted field keys).
+
+### `/admin/legal/{kind}/` — GET, PUT
+`kind, translations { lang: { body } }, translation_status, content_updated_at, updated_at`.
+`body` is Markdown, at most 50,000 characters. Both documents are created on first access.
 
 ### Uploads
 Images only (JPEG, PNG, WebP), verified with Pillow, max 5 MB (configurable),

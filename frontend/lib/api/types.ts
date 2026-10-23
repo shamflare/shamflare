@@ -32,6 +32,15 @@ export type SiteSettings = {
   social_links: { label: string; url: string }[];
 };
 
+export type LegalKind = "privacy" | "terms";
+
+/** An empty `body` means the language has no text in the CMS: use the built-in document. */
+export type LegalDocument = {
+  kind: LegalKind;
+  body: string;
+  updated_at: string | null;
+};
+
 export type ServiceSummary = {
   id: number;
   key: string;
