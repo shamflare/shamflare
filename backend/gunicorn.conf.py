@@ -17,3 +17,6 @@ loglevel = os.environ.get("GUNICORN_LOG_LEVEL", "info")
 # internal Docker network). Django uses SECURE_PROXY_SSL_HEADER/NUM_PROXIES.
 forwarded_allow_ips = os.environ.get("GUNICORN_FORWARDED_ALLOW_IPS", "*")
 limit_request_line = 8190
+# Gunicorn 26+ opens a control socket under $HOME by default; /app is read-only
+# for the app user, and nothing here uses the control interface.
+control_socket_disable = True
